@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kubuverse Integration</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: #1e293b;
+      color: #a5b4fc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      max-width: 900px;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #334155;
+      box-shadow: 0 2px 10px #0f172a88;
+    }
+
+    h1 {
+      margin: 0;
+      font-weight: 700;
+      color: #c7d2fe;
+    }
+
+    nav a {
+      color: #3b82f6;
+      font-weight: 600;
+      text-decoration: none;
+      margin-left: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: #60a5fa;
+      outline: none;
+      text-decoration: underline;
+    }
+
+    main {
+      width: 100%;
+      max-width: 900px;
+      padding: 1.5rem 2rem;
+      background: #334155;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #3b82f6aa;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      flex-grow: 1;
+      min-height: 600px;
+    }
+
+    #controls {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background-color: #6366f1;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      border: none;
+      user-select: none;
+      font-size: 1rem;
+      min-width: 150px;
+    }
+
+    button:hover {
+      background-color: #4f46e5;
+    }
+
+    #wallet-status, #gas-price-widget {
+      font-family: monospace;
+      color: #93c5fd;
+      align-self: center;
+      min-width: 220px;
+      text-align: center;
+    }
+
+    iframe {
+      width: 100%;
+      height: 650px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 0 30px #3b82f6cc;
+      background: white;
+      flex-grow: 1;
+    }
+
+    @media (max-width: 720px) {
+      main {
+        padding: 1rem;
+      }
+      #controls {
+        flex-direction: column;
+        align-items: center;
+      }
+      button, #wallet-status, #gas-price-widget {
+        min-width: auto;
+        width: 100%;
+      }
+      iframe {
+        height: 500px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kubuverse</h1>
+    <nav>
+      <a href="#wallet-section">Wallet</a>
+      <a href="#gas-section">Gas Price</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="controls">
+      <div id="wallet-section" style="display:flex; flex-direction: column; align-items: center;">
+        <button id="connect-wallet-btn">Connect Wallet</button>
+        <p id="wallet-status">Not connected</p>
+      </div>
+
+      <div id="gas-section" style="display:flex; flex-direction: column; align-items: center;">
+        <p>Live Ethereum Gas Price</p>
+        <div id="gas-price-widget">
+          Gas Price: <span id="gas-price">Loading...</span> Gwei
+        </div>
+      </div>
+    </div>
+
+    <!-- Embed kubuverse GitHub Pages app -->
+    <iframe
+      src="https://web4application.github.io/kubuverse/"
+      title="Kubuverse App"
+      sandbox="allow-scripts allow-same-origin allow-forms"
+    ></iframe>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.2/dist/ethers.min.js"></script>
+  <script>
+    (async () => {
+      const connectBtn = document.getElementById('connect-wallet-btn');
+      const statusText = document.getElementById('wallet-status');
+
+      if (!window.ethereum) {
+        statusText.textContent =
+          'No Ethereum wallet detected. Please install MetaMask or compatible wallet.';
+        connectBtn.disabled = true;
+        return;
+      }
+
+      let provider;
+      try {
+        provider = new ethers.BrowserProvider(window.ethereum);
+      } catch (err) {
+        statusText.textContent = 'Error initializing provider: ' + err.message;
+        connectBtn.disabled = true;
+        return;
+      }
+
+      async function connectWallet() {
+        try {
+          const accounts = await provider.send('eth_requestAccounts', []);
+          if (accounts.length === 0) {
+            statusText.textContent = 'No accounts found.';
+            return;
+          }
+
+          const account = accounts[0];
+          const network = await provider.getNetwork();
+
+          statusText.textContent = `Connected: ${account.slice(
+            0,
+            6
+          )}...${account.slice(-4)} on ${network.name}`;
+          connectBtn.textContent = 'Disconnect Wallet';
+
+          connectBtn.onclick = disconnectWallet;
+        } catch (err) {
+          statusText.textContent = 'Connection rejected or failed.';
+        }
+      }
+
+      function disconnectWallet() {
+        statusText.textContent = 'Wallet disconnected.';
+        connectBtn.textContent = 'Connect Wallet';
+        connectBtn.onclick = connectWallet;
+      }
+
+      connectBtn.onclick = connectWallet;
+
+      if (window.ethereum.on) {
+        window.ethereum.on('accountsChanged', (accounts) => {
+          if (accounts.length === 0) {
+            disconnectWallet();
+          } else {
+            connectWallet();
+          }
+        });
+
+        window.ethereum.on('chainChanged', (_chainId) => {
+          window.location.reload();
+        });
+      }
+    })();
+  </script>
+
+  <script>
+    (async () => {
+      const gasPriceEl = document.getElementById('gas-price');
+
+      let provider;
+      if (window.ethereum) {
+        try {
+          provider = new ethers.BrowserProvider(window.ethereum);
+        } catch (err) {
+          console.warn('Error creating provider from ethereum:', err);
+        }
+      }
+
+      async function fetchGasPrice() {
+        try {
+          if (provider) {
+            const gasPriceBigInt = await provider.getGasPrice();
+            const gasPriceGwei = Number(
+              ethers.formatUnits(gasPriceBigInt, 'gwei')
+            ).toFixed(1);
+            gasPriceEl.textContent = gasPriceGwei;
+          } else {
+            // Fallback to public API
+            const res = await fetch(
+              'https://ethgasstation.info/api/ethgasAPI.json?api-key=demo'
+            );
+            if (!res.ok) throw new Error('API fetch failed');
+            const data = await res.json();
+            const fastGwei = (data.fast / 10).toFixed(1);
+            gasPriceEl.textContent = fastGwei;
+          }
+        } catch (err) {
+          console.warn('Failed to fetch gas price:', err);
+          gasPriceEl.textContent = 'N/A';
+        }
+      }
+
+      fetchGasPrice();
+      setInterval(fetchGasPrice, 15000);
+    })();
+  </script>
+</body>
+</html>
