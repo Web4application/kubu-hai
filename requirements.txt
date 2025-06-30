@@ -45,7 +45,7 @@ celery==5.2.6
 redis==4.4.0
 Flask-Login==0.6.2
 Flask-Mail==0.9.1
-Flask-Admin==1.5.8
+Flask-Admin==1.6.1
 flask-caching==1.10.1
 Flask-Session==0.4.0
 flask-socketio==5.3.0
