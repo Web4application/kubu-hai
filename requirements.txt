@@ -12,7 +12,7 @@ PySocks==1.7.1
 pytest==8.0.2
 pytest-timeout==2.1.0
 pyOpenSSL==24.0.0
-idna==3.7
+idna==3.10
 cryptography==42.0.4
 backports.zoneinfo==0.2.1;python_version<"3.9"
 towncrier==23.6.0
