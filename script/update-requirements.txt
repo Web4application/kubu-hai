@@ -63,7 +63,7 @@ cpufeature==0.2.1
  requests
  subprocess
 PyYAML==6.0.2rc1
-certifi==2024.7.4
+certifi==2025.6.15
 charset-normalizer==3.3.2
 dnspython==2.6.1
 fqdn==1.5.1
