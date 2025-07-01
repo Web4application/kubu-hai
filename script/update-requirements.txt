@@ -62,7 +62,7 @@ cpufeature==0.2.1
  ecdsa
  requests
  subprocess
-PyYAML==6.0.2rc1
+PyYAML==6.0.2
 certifi==2024.7.4
 charset-normalizer==3.3.2
 dnspython==2.6.1
