@@ -9,7 +9,7 @@ on:
 
 env:
   AWS_REGION: us-west-2
-  DOCKER_REGISTRY: yourdockerrepo
+  DOCKER_REGISTRY: kubuverse
   KUBE_NAMESPACE: ai-webapp-prod
 
 jobs:
