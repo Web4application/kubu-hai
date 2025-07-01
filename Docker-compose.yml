@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
-    container_name: kubu_backend
+    container_name: kubuverse_backend
     ports:
       - "8000:8000"
     volumes:
@@ -17,7 +17,7 @@ services:
     build:
       context: .
       dockerfile: frontend/Dockerfile
-    container_name: kubu_frontend
+    container_name: kubuverse_frontend
     ports:
       - "3000:80"
     depends_on:
@@ -25,7 +25,7 @@ services:
 
   nginx:
     image: nginx:stable-alpine
-    container_name: kubu_nginx
+    container_name: kubuverse_nginx
     ports:
       - "80:80"
     volumes:
@@ -37,7 +37,7 @@ services:
   backend:
     volumes:
       - ./backend:/app
-      - kubu_projects:/tmp/kubu_projects
+      - kubu_projects:/tmp/kubuverse_projects
 
 volumes:
   kubu_projects:
