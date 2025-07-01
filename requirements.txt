@@ -38,7 +38,7 @@ tensorflow==2.11.1
 torch==2.0.1
 torchvision==0.15.2
 transformers==4.28.1
-spacy==3.5.0
+spacy==3.8.7
 nltk==3.7
 python-dotenv==0.21.1
 celery==5.2.6
