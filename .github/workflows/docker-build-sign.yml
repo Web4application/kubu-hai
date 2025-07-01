@@ -8,7 +8,7 @@ on:
       - 'release/*'
 
 env:
-  IMAGE_NAME: ghcr.io/Web4application/kubu
+  IMAGE_NAME: ghcr.io/Web4application/kubuverse
 
 jobs:
   build-sign-push:
