@@ -99,7 +99,7 @@ jobs:
     needs: [terraform, build_and_push, deploy_k8s, ssh_deploy]
     steps:
       - name: Send Deployment Notification
-        uses: slackapi/slack-github-action@v1
+        uses: slackapi/slack-github-action@v2
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
           slack-message: |
