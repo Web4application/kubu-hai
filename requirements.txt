@@ -10,7 +10,7 @@ h2==4.1.0
 coverage==7.4.1
 PySocks==1.7.1
 pytest==8.0.2
-pytest-timeout==2.1.0
+pytest-timeout==2.4.0
 pyOpenSSL==24.0.0
 idna==3.7
 cryptography==42.0.4
