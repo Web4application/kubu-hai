@@ -7,7 +7,7 @@ RUN pip install -r requirements.txt
 COPY python/ .
 
 # Base C++ stage
-FROM gcc:12 as cpp-build
+FROM gcc:15 as cpp-build
 WORKDIR /app/cpp
 COPY cpp/ .
 RUN make
