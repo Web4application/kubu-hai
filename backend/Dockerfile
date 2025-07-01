@@ -24,7 +24,7 @@ COPY cpp/ .
 RUN make
 
 # Base Ruby stage
-FROM ruby:3.2 as ruby-build
+FROM ruby:3.4 as ruby-build
 WORKDIR /app/ruby
 COPY ruby/ .
 RUN bundle install
@@ -137,7 +137,7 @@ COPY cpp/ .
 RUN make
 
 # Base Ruby stage
-FROM ruby:3.2 as ruby-build
+FROM ruby:3.4 as ruby-build
 WORKDIR /app/ruby
 COPY ruby/ .
 RUN bundle install
