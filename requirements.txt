@@ -35,7 +35,7 @@ numpy==1.26.4
 pandas==1.5.3
 scikit-learn==1.2.2
 tensorflow==2.11.1
-torch==2.0.1
+torch==2.7.1
 torchvision==0.15.2
 transformers==4.28.1
 spacy==3.5.0
