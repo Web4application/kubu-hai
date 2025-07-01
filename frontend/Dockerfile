@@ -1,5 +1,5 @@
 # Base image: Universal devcontainer image (good for multi-language dev)
-FROM mcr.microsoft.com/devcontainers/universal:2
+FROM mcr.microsoft.com/devcontainers/universal:3
 
 # Metadata labels for better traceability and provenance
 LABEL org.opencontainers.image.source="https://github.com/Web4application/kubu.git"

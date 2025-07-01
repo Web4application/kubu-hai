@@ -38,7 +38,7 @@ COPY --from=cpp-build /app/cpp/bin /app/cpp/bin
 COPY --from=ruby-build /app/ruby /app/ruby
 
 # Use Microsoft's universal dev container as base
-FROM mcr.microsoft.com/devcontainers/universal:2
+FROM mcr.microsoft.com/devcontainers/universal:3
 
 # Metadata
 LABEL maintainer="Web4application Team <team@web4application.com>"
