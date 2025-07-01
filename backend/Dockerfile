@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.13-slim
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ COPY app/ ./app/
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 # Base Python stage
-FROM python:3.11-slim as python-build
+FROM python:3.13-slim as python-build
 WORKDIR /app/python
 COPY python/requirements.txt .
 RUN pip install -r requirements.txt
@@ -124,7 +124,7 @@ RUN g++ -Wall -std=c++17 -o app main.cpp || true
 CMD ["make", "help"]
 
 # Base Python stage
-FROM python:3.11-slim as python-build
+FROM python:3.13-slim as python-build
 WORKDIR /app/python
 COPY python/requirements.txt .
 RUN pip install -r requirements.txt
