@@ -1,6 +1,6 @@
 # Dockerfile for docker
 # Base Python stage
-FROM python:3.11-slim as python-build
+FROM python:3.13-slim as python-build
 WORKDIR /app/python
 COPY python/requirements.txt .
 RUN pip install -r requirements.txt
@@ -28,7 +28,7 @@ COPY --from=ruby-build /app/ruby /app/ruby
 
 CMD ["bash"]
 
-FROM python:3.11-slim
+FROM python:3.13-slim
 
 WORKDIR /app
 
