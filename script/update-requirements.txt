@@ -7,7 +7,7 @@ numpy
 scikit-learn
 tensorflow
 transformers
-Pygments==2.18.0
+Pygments==2.19.2
 black==24.4.2
 build==1.2.1
 cffi==1.16.0
