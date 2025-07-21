@@ -4,7 +4,7 @@ black==24.4.2
 build==1.2.1
 cffi==1.16.0
 click==8.1.7
-cmarkgfm==2024.1.14
+cmarkgfm==2024.11.20
 coverage==7.5.4
 docutils==0.20.1
 importlib_metadata==8.0.0
