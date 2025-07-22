@@ -16,7 +16,7 @@ jaraco.functools==4.2.1
 keyring==25.2.1
 markdown-it-py==3.0.0
 mdurl==0.1.2
-more-itertools==10.3.0
+more-itertools==10.7.0
 mypy-extensions==1.1.0
 nh3==0.2.18
 packaging==25.0
