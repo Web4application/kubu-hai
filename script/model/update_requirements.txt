@@ -34,7 +34,7 @@ readme_renderer==44.0
 requests-mock==1.12.1
 requests-toolbelt==1.0.0
 rfc3986==2.0.0
-rich==13.7.1
+rich==14.0.0
 twine==6.1.0
 zipp==3.19.2
 
